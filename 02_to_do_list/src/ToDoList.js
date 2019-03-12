@@ -27,12 +27,20 @@ class ToDoList extends Component {
             })
         }
 
-    handleOnInputChange(e) {
+        handleOnInputChange(e) {
 
             this.setState({
                 inputValue : e.target.value
 
             })
+        }
+
+        handleDelete(e, index) {
+              const list = [...this.state.list];
+              list.splice(index, 1);
+
+              //在ES6中，建和值名字一样，可以使用下面的方式写
+              this.setState({list})
         }
 
         //组件中必须有一个函数render，用于组建要显示的内容
@@ -45,7 +53,7 @@ class ToDoList extends Component {
                   <button onClick={this.handleOnClick.bind(this)}>add</button>
                   <ul>
                       {this.state.list.map((item, index) => {
-                          return <li key={index}>{item}</li>
+                          return <li key={index} onClick={this.handleDelete.bind(this, index)}>{item}</li>
                       })}
                   </ul>
               </div>
