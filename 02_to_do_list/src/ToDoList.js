@@ -62,6 +62,7 @@ class ToDoList extends Component {
                         <ToDoItem
                             key={index}
                             content={item}
+                            index={index}
                             delete={this.handleDelete}  />
                     )
                 })

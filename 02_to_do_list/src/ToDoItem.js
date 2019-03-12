@@ -5,11 +5,12 @@ class ToDoItem extends Component {
     constructor(props) {
         super(props);
 
-        //this.handleDelete = this.handleDelete.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     //子组件如果想和父组件通信，则要调用父组件传递过来的方法
     handleDelete() {
+        console.log("handle delete=====" + this.props.index)
         this.props.delete(this.props.index)
     }
 
@@ -19,7 +20,7 @@ class ToDoItem extends Component {
         const { content } = this.props;
         return (
             <div>
-                <div onClick={this.handleDelete.bind(this)}>{content}</div>
+                <div onClick={this.handleDelete}>{content}</div>
             </div>
         );
     }
