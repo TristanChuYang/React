@@ -17,6 +17,11 @@ class ToDoList extends Component {
                 inputValue : ''
             }
 
+            //在构造器中进行绑定this，这样比在标签中绑定的效率高
+            this.handleOnInputChange = this.handleOnInputChange.bind(this);
+            this.handleOnClick = this.handleOnClick.bind(this);
+            this.handleDelete = this.handleDelete.bind(this);
+
         }
 
         handleOnClick() {
@@ -46,20 +51,34 @@ class ToDoList extends Component {
               this.setState({list})
         }
 
+        //将返回数据部分抽象出来
+        getToDoItems() {
+
+            return (
+                this.state.list.map((item, index) => {
+                    //return <li key={index} onClick={this.handleDelete.bind(this, index)}>{item}</li>
+                    //调用子组件，因为子组件持有相关的参数，则需要把方法给子组件传递过去，让子组件去调用
+                    return (
+                        <ToDoItem
+                            key={index}
+                            content={item}
+                            delete={this.handleDelete}  />
+                    )
+                })
+            )
+
+        }
+
         //组件中必须有一个函数render，用于组建要显示的内容
         render() {
           //JSX语法，不需要加双引号或单引号
           //JS的表达式，使用{}
             return (
               <div className="ToDoList">
-                  <input value={this.state.inputValue} onChange={this.handleOnInputChange.bind(this)}/>
-                  <button onClick={this.handleOnClick.bind(this)}>add</button>
+                  <input value={this.state.inputValue} onChange={this.handleOnInputChange}/>
+                  <button onClick={this.handleOnClick}>add</button>
                   <ul>
-                      {this.state.list.map((item, index) => {
-                          //return <li key={index} onClick={this.handleDelete.bind(this, index)}>{item}</li>
-                          //调用子组件，因为子组件持有相关的参数，则需要把方法给子组件传递过去，让子组件去调用
-                          return <ToDoItem delete={this.handleDelete.bind(this,index)} key={index} content={item} />
-                      })}
+                      {this.getToDoItems()}
                   </ul>
               </div>
             );
