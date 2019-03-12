@@ -56,7 +56,8 @@ class ToDoList extends Component {
                   <ul>
                       {this.state.list.map((item, index) => {
                           //return <li key={index} onClick={this.handleDelete.bind(this, index)}>{item}</li>
-                          return <ToDoItem content={item} />
+                          //调用子组件，因为子组件持有相关的参数，则需要把方法给子组件传递过去，让子组件去调用
+                          return <ToDoItem delete={this.handleDelete.bind(this)} key={index} content={item} />
                       })}
                   </ul>
               </div>
