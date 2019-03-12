@@ -37,9 +37,10 @@ class ToDoList extends Component {
             })
         }
 
-        handleDelete(e, index) {
+        handleDelete(index) {
+              console.log(index)
               const list = [...this.state.list];
-              list.splice(index, 1);
+              list.splice(index,1);
 
               //在ES6中，建和值名字一样，可以使用下面的方式写
               this.setState({list})
@@ -57,7 +58,7 @@ class ToDoList extends Component {
                       {this.state.list.map((item, index) => {
                           //return <li key={index} onClick={this.handleDelete.bind(this, index)}>{item}</li>
                           //调用子组件，因为子组件持有相关的参数，则需要把方法给子组件传递过去，让子组件去调用
-                          return <ToDoItem delete={this.handleDelete.bind(this)} key={index} content={item} />
+                          return <ToDoItem delete={this.handleDelete.bind(this,index)} key={index} content={item} />
                       })}
                   </ul>
               </div>
