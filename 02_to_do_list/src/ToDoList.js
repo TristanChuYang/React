@@ -10,7 +10,9 @@ class ToDoList extends Component {
                     'learn react',
                     'learn react native',
                     'learn vue'
-                ]
+                ],
+                //定义一个数据项，用于存储input输入
+                inputValue : ''
             }
 
         }
@@ -20,7 +22,16 @@ class ToDoList extends Component {
             //要使用react提供的setState方法才可以生效
             //this.state.list.push('Hello World');
             this.setState({
-                list : [...this.state.list, 'Hello World']
+                list : [...this.state.list, this.state.inputValue],
+                inputValue : ''
+            })
+        }
+
+    handleOnInputChange(e) {
+
+            this.setState({
+                inputValue : e.target.value
+
             })
         }
 
@@ -30,7 +41,7 @@ class ToDoList extends Component {
           //JS的表达式，使用{}
             return (
               <div className="ToDoList">
-                  <input/>
+                  <input value={this.state.inputValue} onChange={this.handleOnInputChange.bind(this)}/>
                   <button onClick={this.handleOnClick.bind(this)}>add</button>
                   <ul>
                       {this.state.list.map((item, index) => {
