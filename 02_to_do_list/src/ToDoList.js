@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+//引入自定义组件
+import ToDoItem from './ToDoItem';
 
 //定义一个组件
 class ToDoList extends Component {
@@ -53,7 +55,8 @@ class ToDoList extends Component {
                   <button onClick={this.handleOnClick.bind(this)}>add</button>
                   <ul>
                       {this.state.list.map((item, index) => {
-                          return <li key={index} onClick={this.handleDelete.bind(this, index)}>{item}</li>
+                          //return <li key={index} onClick={this.handleDelete.bind(this, index)}>{item}</li>
+                          return <ToDoItem content={item} />
                       })}
                   </ul>
               </div>
